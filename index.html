@@ -6,7 +6,8 @@
 <title>Weblume — Websites Built for Small Business</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"></noscript>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -71,7 +72,7 @@ body::before {
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
-  filter: blur(80px);
+  filter: blur(50px);
   animation: orb-drift 20s infinite ease-in-out;
 }
 .orb-1 {
@@ -312,8 +313,7 @@ nav.main-nav.scrolled {
   border-radius: var(--r-lg); overflow: hidden; margin-top: 3rem;
 }
 .svc-card {
-  background: rgba(255,255,255,0.28);
-  backdrop-filter: blur(22px);
+  background: rgba(255,255,255,0.60);
   padding: 2.4rem;
   transition: background 0.3s, transform 0.3s;
   position: relative; overflow: hidden;
@@ -378,35 +378,79 @@ nav.main-nav.scrolled {
 .c-dot.active { background: linear-gradient(135deg, var(--accent), var(--accent3)); width: 22px; border-radius: 3px; }
 
 /* FAQ */
-.faq { padding: 6rem 2rem; }
-.faq-list {
-  margin-top: 3rem; display: flex; flex-direction: column;
-  gap: 1px; background: var(--border); border: 1px solid var(--border);
-  border-radius: var(--r-lg); overflow: hidden;
+.faq { padding: 7rem 2rem; }
+.faq-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 3rem; flex-wrap: wrap; margin-bottom: 3.5rem;
 }
-.faq-item { background: rgba(255,255,255,0.28); backdrop-filter: blur(20px); width: 100%; transition: background 0.25s; }
-.faq-item.open { background: rgba(255,255,255,0.48); }
+.faq-header-right { max-width: 290px; padding-top: 0.4rem; }
+.faq-header-right p { font-size: 0.95rem; line-height: 1.75; margin-bottom: 1.2rem; }
+.faq-contact-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700;
+  color: var(--accent); background: rgba(124,58,237,0.08);
+  border: 1px solid rgba(124,58,237,0.20); padding: 0.55rem 1.1rem;
+  border-radius: 100px; cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.faq-contact-btn:hover { background: rgba(124,58,237,0.14); transform: translateX(3px); }
+.faq-list { display: flex; flex-direction: column; gap: 0.8rem; }
+.faq-item {
+  background: rgba(255,255,255,0.52);
+  border: 1px solid rgba(124,58,237,0.09);
+  border-radius: 18px; overflow: hidden;
+  position: relative;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+.faq-item::before {
+  content: '';
+  position: absolute; left: 0; top: 12%; bottom: 12%;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent), var(--accent3));
+  border-radius: 0 3px 3px 0;
+  opacity: 0; transform: scaleY(0.4);
+  transition: opacity 0.35s, transform 0.42s var(--ease-spring);
+}
+.faq-item:hover { border-color: rgba(124,58,237,0.18); background: rgba(255,255,255,0.65); }
+.faq-item.open {
+  background: rgba(255,255,255,0.82);
+  border-color: rgba(124,58,237,0.24);
+  box-shadow: 0 8px 36px rgba(124,58,237,0.08);
+}
+.faq-item.open::before { opacity: 1; transform: scaleY(1); }
 .faq-q {
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  padding: 1.5rem 2rem; cursor: pointer; border: none; background: none;
+  padding: 1.4rem 1.6rem 1.4rem 1.8rem;
+  cursor: pointer; border: none; background: none;
   color: var(--text); text-align: left; width: 100%;
-  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500;
-  transition: background 0.2s;
+  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600;
 }
-.faq-q:hover { background: rgba(124,58,237,0.04); }
+.faq-inner { display: flex; align-items: center; gap: 0.9rem; flex: 1; }
+.faq-num {
+  font-family: 'Syne', sans-serif; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.10em;
+  color: var(--accent);
+  background: linear-gradient(135deg, rgba(124,58,237,0.10), rgba(217,70,239,0.06));
+  border: 1px solid rgba(124,58,237,0.16);
+  padding: 0.22rem 0.55rem; border-radius: 6px;
+  flex-shrink: 0; min-width: 36px; text-align: center;
+}
 .faq-plus {
-  flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
-  border: 1.5px solid var(--border-hi); display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; color: var(--sub); transition: transform 0.35s var(--ease-spring), background 0.2s, border-color 0.2s;
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid rgba(124,58,237,0.18);
+  background: linear-gradient(135deg, rgba(124,58,237,0.07), rgba(217,70,239,0.04));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem; color: var(--sub);
+  transition: transform 0.4s var(--ease-spring), background 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 .faq-item.open .faq-plus {
   transform: rotate(45deg);
-  background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(217,70,239,0.08));
-  color: var(--accent); border-color: rgba(124,58,237,0.30);
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  color: #fff; border-color: transparent;
+  box-shadow: 0 4px 14px rgba(124,58,237,0.30);
 }
-.faq-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease-out), padding 0.3s; }
-.faq-panel p { font-size: 0.95rem; padding: 0 2rem 1.5rem; }
-.faq-item.open .faq-panel { max-height: 200px; }
+.faq-panel { max-height: 0; overflow: hidden; transition: max-height 0.42s var(--ease-out); }
+.faq-panel p { font-size: 0.95rem; padding: 0 2rem 1.6rem 3.8rem; line-height: 1.78; }
+.faq-item.open .faq-panel { max-height: 250px; }
 
 /* CTA STRIP */
 .cta-strip {
@@ -444,8 +488,7 @@ nav.main-nav.scrolled {
 }
 .compare-card {
   border: 1px solid var(--border); border-radius: var(--r-lg);
-  padding: 2rem; background: rgba(255,255,255,0.28);
-  backdrop-filter: blur(22px);
+  padding: 2rem; background: rgba(255,255,255,0.62);
   display: flex; flex-direction: column; gap: 1.4rem;
   transition: transform 0.3s var(--ease-spring), box-shadow 0.3s;
 }
@@ -503,7 +546,7 @@ nav.main-nav.scrolled {
 }
 .work-card {
   border: 1px solid var(--border); border-radius: var(--r-lg);
-  background: rgba(255,255,255,0.30); backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.62);
   overflow: hidden;
   display: flex; flex-direction: column;
   transition: border-color 0.3s, transform 0.3s var(--ease-spring), box-shadow 0.3s; cursor: pointer;
@@ -539,7 +582,7 @@ nav.main-nav.scrolled {
 }
 .team-card {
   border: 1px solid var(--border); border-radius: var(--r-lg);
-  background: rgba(255,255,255,0.30); backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.62);
   overflow: hidden;
   transition: border-color 0.3s, transform 0.3s var(--ease-spring), box-shadow 0.3s;
 }
@@ -678,16 +721,95 @@ h1 em { position: relative; }
 }
 .stat-num.counted { animation: count-pop 0.45s var(--ease-spring) both; }
 
-/* Glass cards */
-.svc-card,
-.faq-item,
-.compare-card,
-.work-card,
-.team-card,
+/* Glass surface — only prominent sections */
 .stats-bar,
 .portfolio {
   backdrop-filter: blur(18px);
 }
+
+/* Hero floating bubbles */
+.hero-bubble {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+  background: radial-gradient(
+    circle at 30% 26%,
+    rgba(220, 195, 255, 0.38) 0%,
+    rgba(140, 80, 245, 0.28) 28%,
+    rgba(80, 30, 210, 0.20) 58%,
+    rgba(45, 10, 160, 0.08) 100%
+  );
+  border: 1.5px solid rgba(200, 160, 255, 0.40);
+  box-shadow:
+    inset 8px 8px 22px rgba(235, 215, 255, 0.24),
+    inset -6px -10px 26px rgba(55, 15, 170, 0.28),
+    0 10px 44px rgba(110, 50, 230, 0.18),
+    0 0 0 1px rgba(180, 130, 255, 0.10);
+}
+.hero-bubble-1 { width: 320px; height: 320px; left: -3%; animation: bubble-rise 16s ease-in-out infinite; }
+.hero-bubble-2 { width: 200px; height: 200px; left: 72%; animation: bubble-rise 11s ease-in-out infinite; animation-delay: -4s; }
+.hero-bubble-3 { width: 150px; height: 150px; left: 44%; animation: bubble-rise 13s ease-in-out infinite; animation-delay: -8.5s; }
+.hero-bubble-4 { width: 100px; height: 100px; left: 86%; animation: bubble-rise 9s ease-in-out infinite; animation-delay: -2s; }
+.hero-bubble-5 { width: 175px; height: 175px; left: 17%; animation: bubble-rise 14s ease-in-out infinite; animation-delay: -6s; }
+@keyframes bubble-rise {
+  0%   { transform: translateY(900px) translateX(0);   opacity: 0; }
+  5%   { opacity: 0.88; }
+  35%  { transform: translateY(350px) translateX(28px); }
+  65%  { transform: translateY(60px)  translateX(-18px); }
+  88%  { opacity: 0.55; }
+  100% { transform: translateY(-500px) translateX(12px); opacity: 0; }
+}
+
+/* TESTIMONIALS */
+.testimonials { position: relative; overflow: hidden; }
+.t-slide {
+  display: none;
+  background: linear-gradient(135deg, #ece9f8 0%, #f0eaf7 40%, #fce8f3 100%);
+  padding: 6rem 2rem 4.5rem;
+  text-align: center;
+}
+.t-slide.active { display: block; animation: t-in 0.55s var(--ease-out) both; }
+@keyframes t-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.t-quote-mark {
+  font-family: 'Syne', sans-serif;
+  font-size: 6.5rem; font-weight: 800; letter-spacing: -0.05em;
+  color: rgba(124,58,237,0.13);
+  line-height: 0.65; margin-bottom: 2rem;
+  display: block; user-select: none;
+}
+.t-text {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.15rem, 2.6vw, 1.8rem);
+  font-weight: 800; letter-spacing: 0.015em; text-transform: uppercase;
+  color: #0f0d2a; max-width: 780px;
+  margin: 0 auto 3rem; line-height: 1.28;
+}
+.t-author { display: inline-flex; align-items: center; gap: 0.85rem; }
+.t-avatar {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem;
+  color: #fff; flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(124,58,237,0.30);
+}
+.t-name { font-size: 0.92rem; font-weight: 700; color: var(--text); text-align: left; }
+.t-loc { font-size: 0.78rem; color: var(--muted); text-align: left; }
+.t-nav {
+  display: flex; justify-content: center; gap: 6px;
+  padding: 0 0 3.5rem;
+  background: linear-gradient(135deg, #ece9f8, #fce8f3);
+}
+.t-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(124,58,237,0.25); border: none; cursor: pointer;
+  transition: all 0.3s;
+}
+.t-dot.active { background: var(--accent); width: 22px; border-radius: 3.5px; }
 
 @media (max-width: 700px) {
   nav.main-nav { padding: 1rem 1.25rem; }
@@ -697,6 +819,10 @@ h1 em { position: relative; }
   .cta-strip { padding: 2.5rem 1.75rem; }
   .form-row { grid-template-columns: 1fr; }
   .stat-item::after { display: none; }
+  .hero-bubble-1 { width: 190px; height: 190px; }
+  .hero-bubble-2 { width: 120px; height: 120px; }
+  .hero-bubble-5 { width: 110px; height: 110px; }
+  .hero-bubble-3, .hero-bubble-4 { display: none; }
 }
 </style>
 </head>
@@ -735,6 +861,11 @@ h1 em { position: relative; }
 <div class="page active" id="page-home">
   <section class="hero">
     <div class="hero-glow"></div>
+    <div class="hero-bubble hero-bubble-1"></div>
+    <div class="hero-bubble hero-bubble-2"></div>
+    <div class="hero-bubble hero-bubble-3"></div>
+    <div class="hero-bubble hero-bubble-4"></div>
+    <div class="hero-bubble hero-bubble-5"></div>
     <div class="hero-particles" id="heroParticles"><canvas id="heroCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;"></canvas></div>
     <div class="hero-tag"><span class="pulse"></span> Currently taking new clients</div>
     <h1>Your website,<br><em>done right.</em></h1>
@@ -798,7 +929,7 @@ h1 em { position: relative; }
         <div class="carousel-track-outer">
           <div class="c-track" id="cTrack">
             <div class="c-slide">
-              <img src="pagoda2.PNG" alt="Pagoda Restaurant" onerror="this.style.display='none'">
+              <img src="pagoda2.PNG" alt="Pagoda Restaurant" loading="lazy" decoding="async" onerror="this.style.display='none'">
               <div class="c-caption">
                 <h3>Pagoda Restaurant</h3>
                 <p>Top-rated Chinese food in Kirkland Lake</p>
@@ -806,7 +937,7 @@ h1 em { position: relative; }
               </div>
             </div>
             <div class="c-slide">
-              <img src="recradar2.PNG" alt="Rec Radar" onerror="this.style.display='none'">
+              <img src="recradar2.PNG" alt="Rec Radar" loading="lazy" decoding="async" onerror="this.style.display='none'">
               <div class="c-caption">
                 <h3>GeeGees Fitness — Rec Radar</h3>
                 <p>Fitness app employed by the University of Ottawa</p>
@@ -814,7 +945,7 @@ h1 em { position: relative; }
               </div>
             </div>
             <div class="c-slide">
-              <img src="ghm2.PNG" alt="Glow Hour Matcha" onerror="this.style.display='none'">
+              <img src="ghm2.PNG" alt="Glow Hour Matcha" loading="lazy" decoding="async" onerror="this.style.display='none'">
               <div class="c-caption">
                 <h3>Glow Hour Matcha</h3>
                 <p>Best matcha popup in Ottawa</p>
@@ -836,31 +967,84 @@ h1 em { position: relative; }
     </div>
   </section>
 
+  <section class="testimonials">
+    <div class="t-slide active" id="t-0">
+      <span class="t-quote-mark">"</span>
+      <p class="t-text">Working with Weblume was effortless. They understood our brand immediately and delivered something we're genuinely proud to show clients.</p>
+      <div class="t-author">
+        <div class="t-avatar">PW</div>
+        <div><div class="t-name">Pulse Wellness</div><div class="t-loc">Ottawa, Canada</div></div>
+      </div>
+    </div>
+    <div class="t-slide" id="t-1">
+      <span class="t-quote-mark">"</span>
+      <p class="t-text">We went from having no online presence to a site we actually love. The turnaround was fast and the whole process was stress-free.</p>
+      <div class="t-author">
+        <div class="t-avatar">NC</div>
+        <div><div class="t-name">North Cut Barbershop</div><div class="t-loc">Kirkland Lake, Canada</div></div>
+      </div>
+    </div>
+    <div class="t-slide" id="t-2">
+      <span class="t-quote-mark">"</span>
+      <p class="t-text">Affordable, professional, and done on time. Weblume gave our studio a real online identity that matches the quality of our work.</p>
+      <div class="t-author">
+        <div class="t-avatar">LS</div>
+        <div><div class="t-name">Lumière Studio</div><div class="t-loc">Ottawa, Canada</div></div>
+      </div>
+    </div>
+    <div class="t-nav">
+      <button class="t-dot active" onclick="goTestimonial(0)"></button>
+      <button class="t-dot" onclick="goTestimonial(1)"></button>
+      <button class="t-dot" onclick="goTestimonial(2)"></button>
+    </div>
+  </section>
+
   <section class="faq">
     <div class="wrap">
-      <div class="fade-up">
-        <div class="section-label">FAQ</div>
-        <h2>Common questions.</h2>
+      <div class="faq-header fade-up">
+        <div>
+          <div class="section-label">FAQ</div>
+          <h2>Common questions,<br>straight answers.</h2>
+        </div>
+        <div class="faq-header-right">
+          <p>Everything you need to know before getting started. Still have something on your mind?</p>
+          <button class="faq-contact-btn" onclick="showPage('booking')">Ask us directly →</button>
+        </div>
       </div>
       <div class="faq-list fade-up">
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">What if I'm not happy with the final website?<span class="faq-plus">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-inner"><span class="faq-num">01</span>What if I'm not happy with the final website?</span>
+            <span class="faq-plus">+</span>
+          </button>
           <div class="faq-panel"><p>We'll revise the design based on your feedback until you're satisfied. If the website still isn't the right fit, you won't be required to pay.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">How long does it usually take to build a website?<span class="faq-plus">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-inner"><span class="faq-num">02</span>How long does it usually take to build a website?</span>
+            <span class="faq-plus">+</span>
+          </button>
           <div class="faq-panel"><p>Most websites are completed within 7–14 days, depending on the size of the project and how many revisions are needed.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">What do you need from me to get started?<span class="faq-plus">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-inner"><span class="faq-num">03</span>What do you need from me to get started?</span>
+            <span class="faq-plus">+</span>
+          </button>
           <div class="faq-panel"><p>We'll ask for a few basics — your business details, any images or content you'd like included, and your goals for the site. That's it.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Do I need to provide all the content upfront?<span class="faq-plus">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-inner"><span class="faq-num">04</span>Do I need to provide all the content upfront?</span>
+            <span class="faq-plus">+</span>
+          </button>
           <div class="faq-panel"><p>Not at all. You can provide content gradually, and we're happy to guide you on what's needed or help structure things if you're unsure.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Will my website work well on mobile devices?<span class="faq-plus">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-inner"><span class="faq-num">05</span>Will my website work well on mobile devices?</span>
+            <span class="faq-plus">+</span>
+          </button>
           <div class="faq-panel"><p>Yes. Every site we build is fully responsive and optimized to look and perform great on phones, tablets, and desktops.</p></div>
         </div>
       </div>
@@ -939,7 +1123,7 @@ h1 em { position: relative; }
   </div>
   <div class="work-grid stagger">
     <a class="work-card fade-up" href="https://pagoda-restaurant-website.vercel.app/" target="_blank" rel="noopener">
-      <div class="work-img-wrap"><img src="pagoda.PNG" alt="Pagoda Restaurant" onerror="this.parentElement.style.background='#1c1c1c'"></div>
+      <div class="work-img-wrap"><img src="pagoda.PNG" alt="Pagoda Restaurant" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#1c1c1c'"></div>
       <div class="work-info">
         <h3>Pagoda Restaurant</h3>
         <p>Restaurant website with a polished, modern layout. Top-rated Chinese food in Kirkland Lake.</p>
@@ -947,7 +1131,7 @@ h1 em { position: relative; }
       </div>
     </a>
     <a class="work-card fade-up" href="https://uogeegees.recreationradar.com/" target="_blank" rel="noopener">
-      <div class="work-img-wrap"><img src="UOlogo.PNG" alt="GeeGees Fitness" onerror="this.parentElement.style.background='#1c1c1c'"></div>
+      <div class="work-img-wrap"><img src="UOlogo.PNG" alt="GeeGees Fitness" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#1c1c1c'"></div>
       <div class="work-info">
         <h3>GeeGees Fitness Page</h3>
         <p>Clean, multiplatform-compatible fitness application employed by the University of Ottawa.</p>
@@ -955,7 +1139,7 @@ h1 em { position: relative; }
       </div>
     </a>
     <a class="work-card fade-up" href="https://recreationradar.com/" target="_blank" rel="noopener">
-      <div class="work-img-wrap"><img src="recradar2.PNG" alt="Rec Radar" onerror="this.parentElement.style.background='#1c1c1c'"></div>
+      <div class="work-img-wrap"><img src="recradar2.PNG" alt="Rec Radar" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#1c1c1c'"></div>
       <div class="work-info">
         <h3>Rec Radar</h3>
         <p>Minimal, modern design showcasing visuals and content clearly. Built for a tech platform.</p>
@@ -963,7 +1147,7 @@ h1 em { position: relative; }
       </div>
     </a>
     <a class="work-card fade-up" href="https://glowhourmatcha.vercel.app/" target="_blank" rel="noopener">
-      <div class="work-img-wrap"><img src="glowhourmatcha.png" alt="Glow Hour Matcha" onerror="this.parentElement.style.background='#1c1c1c'"></div>
+      <div class="work-img-wrap"><img src="glowhourmatcha.png" alt="Glow Hour Matcha" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#1c1c1c'"></div>
       <div class="work-info">
         <h3>Glow Hour Matcha</h3>
         <p>Modern design with animations and featured products. Best matcha popup in Ottawa.</p>
@@ -988,7 +1172,7 @@ h1 em { position: relative; }
   </div>
   <div class="team-grid stagger">
     <div class="team-card fade-up">
-      <img src="matthew.jpeg" alt="Matthew Kranabetter" class="team-photo" onerror="this.style.display='none'">
+      <img src="matthew.jpeg" alt="Matthew Kranabetter" class="team-photo" loading="lazy" decoding="async" onerror="this.style.display='none'">
       <div class="team-info">
         <h3>Matthew Kranabetter</h3>
         <div class="team-role">Designer &amp; Marketer</div>
@@ -1000,7 +1184,7 @@ h1 em { position: relative; }
       </div>
     </div>
     <div class="team-card fade-up">
-      <img src="profle pcture.JPG" alt="Brian Tran" class="team-photo" onerror="this.style.display='none'">
+      <img src="profle pcture.JPG" alt="Brian Tran" class="team-photo" loading="lazy" decoding="async" onerror="this.style.display='none'">
       <div class="team-info">
         <h3>Brian Tran</h3>
         <div class="team-role">Software Engineer</div>
@@ -1012,7 +1196,7 @@ h1 em { position: relative; }
       </div>
     </div>
     <div class="team-card fade-up">
-      <img src="Zach.png" alt="Zach Kranabetter" class="team-photo" onerror="this.style.display='none'">
+      <img src="Zach.png" alt="Zach Kranabetter" class="team-photo" loading="lazy" decoding="async" onerror="this.style.display='none'">
       <div class="team-info">
         <h3>Zach Kranabetter</h3>
         <div class="team-role">Designer</div>
@@ -1210,6 +1394,17 @@ function toggleFaq(btn) {
   resize();
   tick();
 })();
+
+// --- Testimonials ---
+let tIdx = 0;
+const tTotal = 3;
+function goTestimonial(i) {
+  document.getElementById('t-' + tIdx).classList.remove('active');
+  document.querySelectorAll('.t-dot').forEach((d, n) => d.classList.toggle('active', n === i));
+  tIdx = i;
+  document.getElementById('t-' + tIdx).classList.add('active');
+}
+setInterval(() => goTestimonial((tIdx + 1) % tTotal), 5000);
 
 // --- Form ---
 function submitForm() {
