@@ -734,18 +734,29 @@ h1 em { position: relative; }
   pointer-events: none;
   z-index: 3;
   background: radial-gradient(
-    circle at 30% 26%,
-    rgba(220, 195, 255, 0.38) 0%,
-    rgba(140, 80, 245, 0.28) 28%,
-    rgba(80, 30, 210, 0.20) 58%,
-    rgba(45, 10, 160, 0.08) 100%
+    circle at 32% 28%,
+    rgba(255, 248, 255, 0.62) 0%,
+    rgba(210, 140, 255, 0.44) 18%,
+    rgba(130, 55, 245, 0.38) 42%,
+    rgba(75, 20, 210, 0.28) 68%,
+    rgba(35, 5, 140, 0.10) 100%
   );
-  border: 1.5px solid rgba(200, 160, 255, 0.40);
+  border: 1.5px solid rgba(230, 190, 255, 0.65);
   box-shadow:
-    inset 8px 8px 22px rgba(235, 215, 255, 0.24),
-    inset -6px -10px 26px rgba(55, 15, 170, 0.28),
-    0 10px 44px rgba(110, 50, 230, 0.18),
-    0 0 0 1px rgba(180, 130, 255, 0.10);
+    inset 14px 14px 36px rgba(255, 248, 255, 0.50),
+    inset -10px -16px 40px rgba(45, 8, 160, 0.55),
+    0 14px 55px rgba(120, 55, 240, 0.24),
+    0 0 0 1px rgba(210, 165, 255, 0.18);
+}
+.hero-bubble::after {
+  content: '';
+  position: absolute;
+  width: 38%; height: 32%;
+  top: 11%; left: 14%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 40%, rgba(255,255,255,0.72) 0%, transparent 70%);
+  filter: blur(5px);
+  pointer-events: none;
 }
 .hero-bubble-1 { width: 320px; height: 320px; left: -3%; animation: bubble-rise 16s ease-in-out infinite; }
 .hero-bubble-2 { width: 200px; height: 200px; left: 72%; animation: bubble-rise 11s ease-in-out infinite; animation-delay: -4s; }
@@ -1122,12 +1133,12 @@ h1 em { position: relative; }
     <p>A look at some of the websites we've designed and built for real businesses.</p>
   </div>
   <div class="work-grid stagger">
-    <a class="work-card fade-up" href="https://pagoda-restaurant-website.vercel.app/" target="_blank" rel="noopener">
-      <div class="work-img-wrap"><img src="pagoda.PNG" alt="Pagoda Restaurant" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#1c1c1c'"></div>
+    <a class="work-card fade-up" href="https://glowhourmatcha.vercel.app/" target="_blank" rel="noopener">
+      <div class="work-img-wrap"><img src="glowhourmatcha.png" alt="Glow Hour Matcha" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#1c1c1c'"></div>
       <div class="work-info">
-        <h3>Pagoda Restaurant</h3>
-        <p>Restaurant website with a polished, modern layout. Top-rated Chinese food in Kirkland Lake.</p>
-        <div class="work-link-row"><span class="work-tag">Restaurant</span><span class="work-arrow">View site →</span></div>
+        <h3>Glow Hour Matcha</h3>
+        <p>Modern design with animations and featured products. Best matcha popup in Ottawa.</p>
+        <div class="work-link-row"><span class="work-tag">Food &amp; Beverage</span><span class="work-arrow">View site →</span></div>
       </div>
     </a>
     <a class="work-card fade-up" href="https://uogeegees.recreationradar.com/" target="_blank" rel="noopener">
@@ -1146,12 +1157,12 @@ h1 em { position: relative; }
         <div class="work-link-row"><span class="work-tag">Tech / App</span><span class="work-arrow">View site →</span></div>
       </div>
     </a>
-    <a class="work-card fade-up" href="https://glowhourmatcha.vercel.app/" target="_blank" rel="noopener">
-      <div class="work-img-wrap"><img src="glowhourmatcha.png" alt="Glow Hour Matcha" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#1c1c1c'"></div>
+    <a class="work-card fade-up" href="https://pagoda-restaurant-website.vercel.app/" target="_blank" rel="noopener">
+      <div class="work-img-wrap"><img src="pagoda.PNG" alt="Pagoda Restaurant" loading="lazy" decoding="async" onerror="this.parentElement.style.background='#1c1c1c'"></div>
       <div class="work-info">
-        <h3>Glow Hour Matcha</h3>
-        <p>Modern design with animations and featured products. Best matcha popup in Ottawa.</p>
-        <div class="work-link-row"><span class="work-tag">Food &amp; Beverage</span><span class="work-arrow">View site →</span></div>
+        <h3>Pagoda Restaurant</h3>
+        <p>Restaurant website with a polished, modern layout. Top-rated Chinese food in Kirkland Lake.</p>
+        <div class="work-link-row"><span class="work-tag">Restaurant</span><span class="work-arrow">View site →</span></div>
       </div>
     </a>
   </div>
